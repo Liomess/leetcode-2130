@@ -1,0 +1,31 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        ans=-1*float("inf")
+        f=head
+        s=head
+        while f.next.next:
+            s=s.next
+            f=f.next.next
+        dummy=ListNode()
+        dummy.next=s.next
+        h=s.next
+        while h.next:
+            n=h.next
+            h.next=n.next
+            n.next=dummy.next
+            dummy.next=n
+        s.next=dummy.next
+        n=s.next
+        t=head
+        while n:
+            val=t.val+n.val
+            ans=max(ans,val)
+            n=n.next
+            t=t.next
+        return ans
+        
